@@ -1,4 +1,5 @@
 import tkinter as tk
+from PIL import Image as img
 import controller as an
 
 class mkInterface:
@@ -12,7 +13,7 @@ class mkInterface:
         #Config main window
         width = root.winfo_screenwidth()
         height = root.winfo_screenheight()
-        root.geometry(str(int(width/scale)) + 'x' + str(int(height/scale)))
+        root.geometry(str(int(width/scale)) + 'x' + str(int(height/scale)*3))
         print(height)
         print(width)
         print(str(int(width/scale)) + 'x' + str(int(height/scale)))
@@ -23,18 +24,21 @@ class mkInterface:
         self.configCol(tk.Grid, root, 0, 1)
 
         ##Config image
-        imgHolder = self.mkFrameGrid(root, 2, 0, width, height)
+        imgHolder = self.mkFrameGrid(root, 0, 0, width, height)
         #photo = tk.PhotoImage(file="pluto.png")
         #label = tk.Label(imgHolder, image=photo)
         #label.grid(row = 0, column = 0)
         imgPath = r"pluto.png"
-        photo = tk.PhotoImage(file = imgPath)
-        label = tk.Label(imgHolder, image = photo)
+        im_temp = img.open("pluto.jpg")
+        im_temp = im_temp.resize((int((width/4)),int((width/4))), img.ANTIALIAS)
+        im_temp.save("test.ppm", "ppm")
+        photo = tk.PhotoImage(file = "test.ppm")
+        label = tk.Label(imgHolder, image = photo, anchor = tk.E)
         label.image = photo # keep a reference!
-        label.grid(row = 3, column = 1, padx = 5, pady = 5)
+        label.grid(row = 3, column = 1)#padx = 5, pady = 5
          
         ##Config upper body
-        mainHolder = self.mkFrameGrid(root, 0, 0, width, height)
+        mainHolder = self.mkFrameGrid(root, 1, 0, width, height)
         holderCan = self.mkCanvasPack(mainHolder, width, height)
         scrollbar = self.mkScrollBar(mainHolder, holderCan)
 
@@ -49,7 +53,7 @@ class mkInterface:
 
         ##Config text entry
         textEntry = tk.Frame(root)
-        textEntry.grid(row=1,column=0,sticky=tk.N+tk.E+tk.S+tk.W)
+        textEntry.grid(row=2,column=0,sticky=tk.N+tk.E+tk.S+tk.W)
         hold = tk.StringVar()
         submit = tk.Button(textEntry, text = "\u25B2", bg = 'white', command = self.getInput)
         root.bind('<Return>', self.getInput)
