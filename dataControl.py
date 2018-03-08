@@ -40,6 +40,7 @@ def specificInfoP1(inputText):
     print(config)
     count = 0
     hold = brokenWords(inputText)
+    text = translate(hold)
     potential = []
     unique = 0
     previousHit = ''
@@ -49,7 +50,7 @@ def specificInfoP1(inputText):
         count += 1
         for element in data:
             print(element)
-            for word in hold:
+            for word in text:
                 if element == word or element.lower() == word:
                     if element != previousHit:
                         unique += 1
@@ -129,6 +130,23 @@ def compareData(inputText, info):
     
     return lp
 
+def translate(inputText):
+    data = loadData("translate")
+    text = inputText
+    print(text)
+    for entry in data:
+        print(entry)
+        count = 0
+        for words in data[entry]:
+            print(words)
+            for word in text:
+                print(word)
+                if words == word or words.lower() == word:
+                    print("Word found ", word)
+                    text[count] = entry
+                count += 1
+    print(text)
+    return text
 
 # File - Which category you want to update, e.g., planets
 # Info - what information you want to add
