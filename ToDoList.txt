@@ -1,0 +1,77 @@
+1.print info
+2.compare distance
+3.get a specific piece of information
+
+
+2 What is the closest planet to the Sun?
+3 What is the name of the 2nd biggest planet in our solar system?
+3 What is the hottest planet in our solar system?
+3 What planet is famous for its big red spot on it?
+3 What planet is famous for the beautiful rings that surround it?
+1 Can humans breathe normally in space as they can on Earth?
+1 Is the sun a star or a planet?
+1 Who was the first person to walk on the moon?
+1 What planet is known as the red planet?
+1 What is the name of the force holding us to the Earth?
+1 Have human beings ever set foot on Mars?
+1 What is the name of a place that uses telescopes and other scientific equipment to research space and astronomy?
+1 What is the name of NASA’s most famous space telescope?
+1 Earth is located in which galaxy?
+1 What is the name of the first satellite sent into space?
+3 Ganymede is a moon of which planet?
+3 What is the name of Saturn’s largest moon?
+3 Olympus Mons is a large volcanic mountain on which planet?
+1 Does the sun orbit the Earth?
+3 Is the planet Neptune bigger than Earth?
+
+
+
+2 What is the closest planet to Saturn?
+3 What color is Venus?
+1 What is a constellation?
+1 Why is the earth round?
+1 Why does the earth spin?
+1 What was the first animal in space?
+3 What is the hottest planet in the solar system?
+3 What is Saturn made of?
+3 What is the smallest planet in the solar system?
+1 Why do stars die?
+3 Why is Mars Red?
+3 Why Mars is called the Red Planet?
+3 Why does Saturn have rings?
+1 Why isn’t the asteroid belt a planet?
+1 Why are astronauts weightless in space?
+1 Why is the center of the earth hot?
+1 Why are stars different colors?
+3 Why are Saturn’s rings disappearing?
+1 Why dying stars might be a good place to look for life?
+1 Why doesn’t earth have more water?
+1 Why are distant galaxies moving away faster?
+1 Why does the Man in the Moon face the earth?
+3 Why is Mars so dry?
+1 Why can we see the moon during the day?
+1 Why is the Moon Leaving Us?
+1 Why does the moon shine?
+1 Why are planets round?
+1 Why do some scientists consider Pluto to not be a planet?
+1 Why are there seasons?
+1 Why the sky is blue?
+1 Why is space black?
+1 Why can’t we launch garbage into space?
+1 Why do stars shine?
+1 Why is the sun hot?
+1 Why is the sunset red?
+1 How Fast Does the Earth Rotate?
+1 What is the Distance to the Moon?
+3 How Many Moons Does Mars Have?
+3 How Many Moons Does Jupiter Have?
+3 How Many Moons Does Neptune Have?
+1 Why is Pluto No Longer a Planet?
+1 How Hot is the Sun?
+1 How Many Stars are in the Solar System?
+3 How Long is a Year on Uranus?
+1 How Long Does it Take to Get to Mars?
+3 How Hot is Venus?How Long Does it Take to get to the Moon?
+3 How Long Does it Take Uranus to Orbit the Sun?
+1 Why Does Jupiter Have the Great Red Spot?
+1 Why Do Stars Twinkle?
