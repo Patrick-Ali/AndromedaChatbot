@@ -1,3 +1,5 @@
 {
-	"larger":["bigger", "largest"]
+	"Diameter":["larger","bigger", "largest"],
+	"Diameter smallest":["smallest", "small"],
+	"Orbit Distance":["further", "more distant", "more remote", "remoter", "furthest"]
 }
