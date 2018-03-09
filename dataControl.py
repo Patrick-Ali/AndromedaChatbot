@@ -126,10 +126,18 @@ def compareData(inputText, info):
             key = i
     print("KeyLime ", key)
     
-    if key == "Diameter":
-        key = "largest"
-    if key == "Diameter smallest":
-        key = "smallest"
+    actions = loadData("actions")
+    for action in actions:
+        print("Actions ", action)
+        for actionKey in actions[action]:
+            print("Action ", actionKey)
+            if actionKey == key:
+                key = action
+    
+##    if key == "Diameter":
+##        key = "largest"
+##    if key == "Diameter smallest":
+##        key = "smallest"
     print("Yolo Key is ", key)
     if key == "largest":
         return compareLargest(values)

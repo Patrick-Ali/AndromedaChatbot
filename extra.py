@@ -19,3 +19,5 @@ def compareSmallest(values):
         count += 1
     
     return smallestEntry
+
+    "Orbit Distance":["further", "more distant", "more remote", "remoter", "furthest"]
