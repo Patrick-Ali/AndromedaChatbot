@@ -11,6 +11,7 @@ class mkInterface:
     
     
     def __init__(self, root):
+        root.title("PlanetBot")
         scale = 4
         #Config main window
         width = root.winfo_screenwidth()
@@ -57,12 +58,12 @@ class mkInterface:
         textEntry = tk.Frame(root)
         textEntry.grid(row=2,column=0,sticky=tk.N+tk.E+tk.S+tk.W)
         hold = tk.StringVar()
-        submit = tk.Button(textEntry, text = "\u25B2", bg = 'white', command = self.getInput)
+        submit = tk.Button(textEntry, text = "\u25B2", bg = 'grey', command = self.getInput)
         root.bind('<Return>', self.getInput)
         tk.Grid.rowconfigure(textEntry, 0, weight=1)
         tk.Grid.columnconfigure(textEntry, 0, weight=1)
         submit.grid(row = 0, column = 1, sticky = tk.W)
-        self.E1 = tk.Entry(textEntry, bd = 5, bg = 'white',
+        self.E1 = tk.Entry(textEntry, bd = 5, bg = 'lightgrey',
            font = 'arial', relief = tk.FLAT,
            textvariable=hold)
         self.E1.grid(row = 0, sticky='we')
