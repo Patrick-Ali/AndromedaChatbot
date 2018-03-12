@@ -9,12 +9,15 @@ def addData(file, data):
     with open(full, 'w') as f:
         json.dump(data,f)
 
-def getData(file, key): #, value
+def getData(file, key, value = None): #, value
     end = '.json'
     full = str(file+end)
     with open(full, 'r') as f:
         data = json.load(f)
-    return data[key]#[value]
+    if value == None:
+        return data[key]#[value]
+    else:
+        return data[key][value]
 
 def loadData(file):
     end = '.json'

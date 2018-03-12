@@ -1,12 +1,14 @@
 import tkinter as tk
 from PIL import Image as img
 import controller as an
+import dataControl as res
 
 class mkInterface:
     count = 0
     E1 = ''
     topText = ''
     test = an.AnalyseInput()
+    
     
     def __init__(self, root):
         scale = 4
@@ -108,8 +110,17 @@ class mkInterface:
         self.addWeight(self.count)
         self.makeLabel(current, "lightgrey", "black", "w", self.count, 1)
         self.count += 1
-        holdAn = self.test.readInput(current) 
+        holdAn = ''
+        holdAn1 = self.test.readInput(current)
+        print("First hold ", holdAn1)
         #self.addWeight(self.count)
+        holdAn2 = res.specificInfoP1(current)
+        print(type(holdAn2))
+        print(holdAn2)
+        if holdAn2 == [[],[]]:
+            holdAn = holdAn1
+        else:
+            holdAn = holdAn2
         self.makeLabel(holdAn, "blue", "white", "e", self.count, 2)
         self.count += 1
         
