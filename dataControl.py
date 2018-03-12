@@ -41,6 +41,7 @@ def specificInfoP1(inputText):
     count = 0
     hold = brokenWords(inputText)
     text = translate(hold)
+    print("Text is ", text)
     potential = []
     unique = 0
     previousHit = ''
@@ -99,16 +100,23 @@ def specificInfoP2(inputText, info):
                     print("tempHold ", tempHold)
                     counting = 0
                     for entry in tempHold:
-                        if key == entry or key == (lastWord+' '+entry):
+                        print("Entry ", entry)
+                        extraHelp = translate(entry)
+                        print("Extra Help ", extraHelp)
+                        if key == entry or key == (lastWord+' '+entry) or key == extraHelp:
                             potentialInfo.append({keys[count]:element[key]})
-                            usedKey.append(key + ' ' + tempHold[counting + 1])
+                            if (counting + 1) < len(tempHold):
+                                usedKey.append(key + ' ' + tempHold[counting + 1])
                         lastWord = entry
                         counting += 1
                 if key == word or key == (lastWord+' '+word):
-                    potentialInfo.append({keys[count]:element[key]})
+                    if keys[count] in potentialInfo:
+                        if potentialInfo[keys[count]] != element[key]:
+                            potentialInfo.append({keys[count]:element[key]})
                     usedKey.append(key)
                 lastWord = word
         count += 1
+    print("Pot ", potentialInfo)
     held.append(potentialInfo)
     held.append(usedKey)
     return held #potentialInfo
@@ -232,6 +240,7 @@ def translate(inputText):
     data = loadData("translate")
     text = inputText
     print(text)
+    print("Text length ", len(text))
     #count = 0
     for entry in data:
         print(entry)
@@ -240,14 +249,21 @@ def translate(inputText):
         for words in data[entry]:
             print(words)
             count = 0
-            for word in text:
-                print(word)
-                if words == word or words.lower() == word:
-                    print("Word found ", word)
-                    print(text)
-                    print(count)
-                    text[count] = entry
-                count += 1
+            if type(text) == list:
+                for word in text:
+                    print(word)
+                    if words == word or words.lower() == word:
+                        print("Word found ", word)
+                        print(text)
+                        print(count)
+                        text[count] = entry
+                    count += 1
+            else:
+                if words == text or words.lower() == text:
+                        print("Word found ", text)
+                        print(text)
+                        #print(count)
+                        text = entry
     print(text)
     return text
 
