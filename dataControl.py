@@ -95,21 +95,36 @@ def specificInfoP2(inputText, info):
         for key in element:
             
             for word in inputText:
-                print(word)
-                print(key)
-                print(lastWord+' '+word)
+                print('Word ', word)
+                print("Key ", key)
+                print("Potential Word ", lastWord+' '+word)
                 tempHold = word.split(" ")
                 if len(tempHold) > 1:
                     print("tempHold ", tempHold)
                     counting = 0
                     for entry in tempHold:
                         print("Entry ", entry)
+                        print("Key ", key)
                         extraHelp = translate(entry)
                         print("Extra Help ", extraHelp)
-                        if key == entry or key == (lastWord+' '+entry) or key == extraHelp:
+                        move = counting
+                        if counting + 1 < len(tempHold):
+                            move = counting + 1
+                        print('Move ', (lastWord+' '+entry+' '+tempHold[move]))
+                        print('Move2', (entry+' '+tempHold[move]))
+                        if key == entry or key == (lastWord+' '+entry) or key == extraHelp or key == (lastWord+' '+entry+' '+tempHold[move]) or key == (entry+' '+tempHold[move]):
+                            print('Key found')
                             potentialInfo.append({keys[count]:element[key]})
                             if (counting + 1) < len(tempHold):
                                 usedKey.append(key + ' ' + tempHold[counting + 1])
+                                usedKey.append(lastWord+' '+key)
+                                usedKey.append(lastWord+' '+entry+' '+tempHold[counting+1])
+                            else:
+                                usedKey.append(key + ' ' + tempHold[counting])
+                                usedKey.append(lastWord+' '+key)
+                                usedKey.append(lastWord+' '+entry+' '+tempHold[counting])
+                                print(key + ' ' + tempHold[counting])
+                                #specificInfoP1('most moons earth mars')
                         lastWord = entry
                         counting += 1
                 if key == word or key == (lastWord+' '+word):
@@ -117,8 +132,9 @@ def specificInfoP2(inputText, info):
                         if potentialInfo[keys[count]] != element[key]:
                             potentialInfo.append({keys[count]:element[key]})
                     usedKey.append(key)
-                lastWord = word
+                    lastWord = word
         count += 1
+    print("Kilo ", usedKey)
     print("Pot ", potentialInfo)
     held.append(potentialInfo)
     held.append(usedKey)
@@ -130,6 +146,7 @@ def compareData(inputText, info):
     print(values)
     keyWords = loadData("keyWords")
     key = ''
+    print('Testel ', hold[1])
     for i in hold[1]:
         print("val1 ", i)
         if i in keyWords["keywords"]:
@@ -244,6 +261,7 @@ def translate(inputText):
     text = inputText
     print(text)
     print("Text length ", len(text))
+    lastWord = ''
     #count = 0
     for entry in data:
         print(entry)
@@ -254,12 +272,17 @@ def translate(inputText):
             count = 0
             if type(text) == list:
                 for word in text:
-                    print(word)
-                    if words == word or words.lower() == word:
+                    print("Happy ", word)
+                    print("Testaro ", lastWord+' '+word)
+                    move = count
+                    if count + 1 < len(text):
+                        move = count+1
+                    if words == word or words.lower() == word or words == lastWord+' '+word or words == lastWord+' '+word+' '+text[move]:
                         print("Word found ", word)
                         print(text)
                         print(count)
                         text[count] = entry
+                    lastWord = word
                     count += 1
             else:
                 if words == text or words.lower() == text:

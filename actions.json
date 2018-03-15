@@ -1,5 +1,5 @@
 {
-	"smallest":["Diameter smallest", "Orbit Distance closest", "Equatorial Diameter smallest"],
-	"largest":["Diameter largest", "Orbit Distance furthest", "Equatorial Diameter largest"]
+	"smallest":["Diameter smallest", "Orbit Distance closest", "Equatorial Diameter smallest", "Least Number Moons"],
+	"largest":["Diameter largest", "Orbit Distance furthest", "Equatorial Diameter largest", "More Number Moons"]
 	
 }
