@@ -1,7 +1,7 @@
 {
 	
 	"Diameter largest":["larger","bigger", "largest"],
-	"Diameter smallest":["smallest", "small"],
+	"Diameter smallest":["smallest", "small", "smaller"],
 	"Orbit Distance furthest":["further", "more distant", "more remote", "remoter", "furthest"],
 	"Equatorial Diameter": ["Diameter", "size", "diameter"]
 }
