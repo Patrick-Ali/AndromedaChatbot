@@ -55,7 +55,7 @@ def specificInfoP1(inputText):
         for element in data:
             print(element)
             for word in text:
-                if element == word or element.lower() == word:
+                if element == word or element.lower() == word or element == (word+"'s") or element.lower() == (word+"'s"):
                     if element != previousHit:
                         unique += 1
                     previousHit = element
@@ -114,17 +114,32 @@ def specificInfoP2(inputText, info):
                         print('Move2', (entry+' '+tempHold[move]))
                         if key == entry or key == (lastWord+' '+entry) or key == extraHelp or key == (lastWord+' '+entry+' '+tempHold[move]) or key == (entry+' '+tempHold[move]):
                             print('Key found')
-                            potentialInfo.append({keys[count]:element[key]})
-                            if (counting + 1) < len(tempHold):
-                                usedKey.append(key + ' ' + tempHold[counting + 1])
-                                usedKey.append(lastWord+' '+key)
-                                usedKey.append(lastWord+' '+entry+' '+tempHold[counting+1])
-                            else:
-                                usedKey.append(key + ' ' + tempHold[counting])
-                                usedKey.append(lastWord+' '+key)
-                                usedKey.append(lastWord+' '+entry+' '+tempHold[counting])
-                                print(key + ' ' + tempHold[counting])
-                                #specificInfoP1('most moons earth mars')
+                            addInfo = True
+                            print('Keys Count ', keys[count])
+                            print('pInfo1 ', potentialInfo)
+                            for i in potentialInfo:
+                                if keys[count] in i:
+                                    print("I is ", i)
+                                    print('Keys Count ', keys[count])
+                                    print('Check ', element[key])
+                                    #print('pInfo ', potentialInfo[keys[count]])
+                                    print('eKey ', element[key])
+                                    if element[key] == i[keys[count]]:  #potentialInfo[keys[count]] == element[key]:
+                                        addInfo = False
+                            if addInfo == True: #keys[count] not in potentialInfo or
+                                print('pInfo3 ', potentialInfo)
+                                print({keys[count]:element[key]})
+                                potentialInfo.append({keys[count]:element[key]})
+                                if (counting + 1) < len(tempHold):
+                                    usedKey.append(key + ' ' + tempHold[counting + 1])
+                                    usedKey.append(lastWord+' '+key)
+                                    usedKey.append(lastWord+' '+entry+' '+tempHold[counting+1])
+                                else:
+                                    usedKey.append(key + ' ' + tempHold[counting])
+                                    usedKey.append(lastWord+' '+key)
+                                    usedKey.append(lastWord+' '+entry+' '+tempHold[counting])
+                                    print(key + ' ' + tempHold[counting])
+                                    #specificInfoP1('most moons earth mars')
                         lastWord = entry
                         counting += 1
                 if key == word or key == (lastWord+' '+word):
@@ -240,8 +255,9 @@ def compareLargest(values):
     rawValues = getRawValue(values)
     largest = rawValues[0]
     for val in rawValues:
-        if val > largest:
-            largest = val
+        if type(val) == int:
+            if val > largest:
+                largest = val
     print(largest)
     largestEntry = ''
     count = 0
