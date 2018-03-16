@@ -3,6 +3,7 @@
 	"Diameter largest":["larger","bigger", "largest"],
 	"Diameter smallest":["smallest", "small", "smaller"],
 	"Orbit Distance furthest":["further", "more distant", "more remote", "remoter", "furthest"],
+	"Orbit Distance closest":["closest", "nearest"],
 	"Equatorial Diameter": ["Diameter", "size", "diameter"],
 	"More Number Moons": ["more moons", "most moons"],
 	"Least Number Moons": ["fewest moons", "fewer moons", "least moons"],

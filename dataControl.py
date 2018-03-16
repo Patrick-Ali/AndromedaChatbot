@@ -132,11 +132,15 @@ def specificInfoP2(inputText, info):
                                 potentialInfo.append({keys[count]:element[key]})
                                 if (counting + 1) < len(tempHold):
                                     usedKey.append(key + ' ' + tempHold[counting + 1])
+                                    usedKey.append(tempHold[counting] + ' ' + key)
                                     usedKey.append(lastWord+' '+key)
+                                    usedKey.append(key+' '+lastWord)
                                     usedKey.append(lastWord+' '+entry+' '+tempHold[counting+1])
                                 else:
                                     usedKey.append(key + ' ' + tempHold[counting])
+                                    usedKey.append(tempHold[counting] + ' ' + key)
                                     usedKey.append(lastWord+' '+key)
+                                    usedKey.append(key+' '+lastWord)
                                     usedKey.append(lastWord+' '+entry+' '+tempHold[counting])
                                     print(key + ' ' + tempHold[counting])
                                     #specificInfoP1('most moons earth mars')
