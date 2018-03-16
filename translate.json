@@ -5,6 +5,7 @@
 	"Orbit Distance furthest":["further", "more distant", "more remote", "remoter", "furthest"],
 	"Equatorial Diameter": ["Diameter", "size", "diameter"],
 	"More Number Moons": ["more moons", "most moons"],
-	"Least Number Moons": ["fewest moons", "fewer moons", "least moons"]
+	"Least Number Moons": ["fewest moons", "fewer moons", "least moons"],
+	"Moons Name": ["Name of Moons", "name of moons", "Name of moons", "moon", "moons", "Moon", "Moons"]
 	
 }

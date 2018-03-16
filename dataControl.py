@@ -171,6 +171,8 @@ def compareData(inputText, info):
         return compareLargest(values)
     elif key == "smallest":
         return compareSmallest(values)
+    else:
+        return values
 ##    count = 0
 ##    rawVals = []
 ##    for i in values:
