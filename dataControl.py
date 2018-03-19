@@ -62,11 +62,42 @@ def specificInfoP1(inputText):
                     potential.append({element:data[element]})
     if unique < 2:
         return specificInfoP2(hold, potential)
+    elif unique > 2 and ('to' in hold or 'from' in hold):
+        return distanceToObject(hold, potential)
     else:
         return compareData(hold, potential)
 
 #def checkKey(key, word)
-
+def distanceToObject(inputText, info):
+    hold = specificInfoP2(inputText, info)
+    print("Holdaro ", hold)
+    first = hold[0]
+    against = 0
+    tempHold = []
+    if len(first) > 0:
+        check = first[-1]
+        print(check)
+        for key in check:
+            against = check[key]
+            print(against)
+        i = 0
+        while i < (len(first)-1):
+            temp = first[i]
+            for key in temp:
+                tempAgainst = temp[key]
+                print(tempAgainst)
+                tempSet = against-tempAgainst
+                print(tempSet)
+                tempHold.append({key:tempSet})
+            i += 1
+        print(tempHold)
+        if 'to' in inputText:
+            test = compareSmallest(tempHold)
+        elif 'from' in inputText:
+            test = compareLargest(tempHold)
+        print(test)
+            #specificInfoP1('closest to earth venus mercury')
+    return hold
 
 def specificInfoP2(inputText, info):
     potentialInfo = []
@@ -126,17 +157,27 @@ def specificInfoP2(inputText, info):
                                     print('eKey ', element[key])
                                     if element[key] == i[keys[count]]:  #potentialInfo[keys[count]] == element[key]:
                                         addInfo = False
-                            if addInfo == True: #keys[count] not in potentialInfo or
+                            hopeing = True
+                            if hopeing == True: #addInfo == True: keys[count] not in potentialInfo or
                                 print('pInfo3 ', potentialInfo)
                                 print({keys[count]:element[key]})
                                 potentialInfo.append({keys[count]:element[key]})
+                                print('key used ', key)
                                 if (counting + 1) < len(tempHold):
+                                    print('TH ', tempHold[counting + 1])
+                                    print('LW ', lastWord)
+                                    usedKey.append(lastWord + ' ' + tempHold[counting + 1])
+                                    usedKey.append(tempHold[counting + 1] + ' ' + lastWord)
                                     usedKey.append(key + ' ' + tempHold[counting + 1])
-                                    usedKey.append(tempHold[counting] + ' ' + key)
+                                    usedKey.append(tempHold[counting + 1] + ' ' + key)
                                     usedKey.append(lastWord+' '+key)
                                     usedKey.append(key+' '+lastWord)
                                     usedKey.append(lastWord+' '+entry+' '+tempHold[counting+1])
                                 else:
+                                    print('TH2 ', tempHold[counting])
+                                    print('LW2 ', lastWord)
+                                    usedKey.append(lastWord + ' ' + tempHold[counting])
+                                    usedKey.append(tempHold[counting] + ' ' + lastWord)
                                     usedKey.append(key + ' ' + tempHold[counting])
                                     usedKey.append(tempHold[counting] + ' ' + key)
                                     usedKey.append(lastWord+' '+key)
@@ -259,7 +300,7 @@ def compareLargest(values):
     rawValues = getRawValue(values)
     largest = rawValues[0]
     for val in rawValues:
-        if type(val) == int:
+        if type(val) == int or type(val) == float:
             if val > largest:
                 largest = val
     print(largest)
