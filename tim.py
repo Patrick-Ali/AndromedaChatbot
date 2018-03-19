@@ -1,4 +1,5 @@
 import tkinter as tk
+import threading
 from PIL import Image as img
 import controller as an
 import dataControl as res
@@ -8,6 +9,7 @@ class mkInterface:
     E1 = ''
     topText = ''
     test = an.AnalyseInput()
+   # current = ''
     
     
     def __init__(self, root):
@@ -110,10 +112,34 @@ class mkInterface:
         
     def addWeight(self, count):
             tk.Grid.rowconfigure(self.topText, count, weight=1)
-            
-    def getInput(self, event = None):
-        current = self.E1.get()
-        print(current)
+    
+    def run_before(lastfunc, *args1, **kwargs1):
+        def run(func):
+            def wrapped_func(self, *args, **kwargs):
+                try:
+                    result = func(self, *args, **kwargs)
+                except:
+                    result = None
+                finally:
+                    lastfunc(self, *args1, **kwargs1)
+                    return result
+            return wrapped_func
+        return run
+
+    
+    def getOutput(self, current): #, current
+        holdAn2 = res.specificInfoP1(current)
+        #print(type(holdAn2))
+        print(holdAn2)
+        if holdAn2 == [[],[]]:
+            holdAn1 = self.test.readInput(current)
+            holdAn = holdAn1
+        else:
+            holdAn = holdAn2
+        self.makeLabel(holdAn, "blue", "white", "e", self.count, 2)
+        self.count += 1
+        
+    def firstStep(self, current):
         size = len(current)
         self.E1.delete(0,size)
         tk.Grid.rowconfigure(self.topText, self.count, weight=1)
@@ -121,18 +147,42 @@ class mkInterface:
         self.makeLabel(current, "lightgrey", "black", "w", self.count, 1)
         self.count += 1
         holdAn = ''
-        holdAn1 = self.test.readInput(current)
-        print("First hold ", holdAn1)
-        #self.addWeight(self.count)
-        holdAn2 = res.specificInfoP1(current)
-        print(type(holdAn2))
-        print(holdAn2)
-        if holdAn2 == [[],[]]:
-            holdAn = holdAn1
-        else:
-            holdAn = holdAn2
-        self.makeLabel(holdAn, "blue", "white", "e", self.count, 2)
+        thinkMsg = "Let me think about that"
+        self.makeLabel(thinkMsg, "blue", "white", "e", self.count, 2)
+        
+    #@run_before(getOutput)        
+    def getInput(self, event = None):
+        current = self.E1.get()
+        print(current)
+        self.firstStep(current)
+##        size = len(current)
+##        self.E1.delete(0,size)
+##        tk.Grid.rowconfigure(self.topText, self.count, weight=1)
+##        self.addWeight(self.count)
+##        self.makeLabel(current, "lightgrey", "black", "w", self.count, 1)
+##        self.count += 1
+##        holdAn = ''
+##        thinkMsg = "Let me think about that"
+##        self.makeLabel(thinkMsg, "blue", "white", "e", self.count, 2)
         self.count += 1
+        self.getOutput(current)
+        #thr = threading.Thread(target=self.getOuput(current), args=(), kwargs=())
+        #thr.start()
+        #thr.is_alive()
+        #thr.join()
+        #holdAn1 = self.test.readInput(current)
+        #print("First hold ", holdAn1)
+        #self.addWeight(self.count)
+##        holdAn2 = res.specificInfoP1(current)
+##        #print(type(holdAn2))
+##        print(holdAn2)
+##        if holdAn2 == [[],[]]:
+##            holdAn1 = self.test.readInput(current)
+##            holdAn = holdAn1
+##        else:
+##            holdAn = holdAn2
+##        self.makeLabel(holdAn, "blue", "white", "e", self.count, 2)
+##        self.count += 1
         
     def onFrameConfigure(self, canvas):
         '''Reset the scroll region to encompass the inner frame'''
