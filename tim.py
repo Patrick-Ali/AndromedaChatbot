@@ -67,6 +67,15 @@ class mkInterface:
            font = 'arial', relief = tk.FLAT,
            textvariable=hold)
         self.E1.grid(row = 0, sticky='we')
+
+        ##Init message
+        welcomeMsg = ("Hello, I am Andromeda,"
+                      " I am currently in training but can tell you some"
+                      " fun facts about your solar system."
+                      " For more information type and enter 'help'"
+                      " and I will tell you somethings I can do.")
+        self.makeLabel(welcomeMsg, "blue", "white", "e", self.count, 2)
+        self.count += 1
         
     def mkFrameGrid(self, place, ro, col, width, height):
         frame = tk.Frame(place)
