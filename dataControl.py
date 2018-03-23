@@ -74,9 +74,11 @@ def distanceToObject(inputText, info):
     first = hold[0]
     against = 0
     tempHold = []
+    test = ''
+    print("First Len ", len(first))
     if len(first) > 0:
         check = first[-1]
-        print(check)
+        print('Checked ', check)
         for key in check:
             against = check[key]
             print(against)
@@ -84,20 +86,21 @@ def distanceToObject(inputText, info):
         while i < (len(first)-1):
             temp = first[i]
             for key in temp:
+                print("Kiloro ", key)
                 tempAgainst = temp[key]
                 print(tempAgainst)
                 tempSet = against-tempAgainst
                 print(tempSet)
                 tempHold.append({key:tempSet})
             i += 1
-        print(tempHold)
+        print('TH ', tempHold)
         if 'to' in inputText:
             test = compareSmallest(tempHold)
         elif 'from' in inputText:
             test = compareLargest(tempHold)
-        print(test)
+        print('Testaro ', test)
             #specificInfoP1('closest to earth venus mercury')
-    return hold
+    return test
 
 def specificInfoP2(inputText, info):
     potentialInfo = []
@@ -161,7 +164,8 @@ def specificInfoP2(inputText, info):
                             if hopeing == True: #addInfo == True: keys[count] not in potentialInfo or
                                 print('pInfo3 ', potentialInfo)
                                 print({keys[count]:element[key]})
-                                potentialInfo.append({keys[count]:element[key]})
+                                if addInfo == True:
+                                    potentialInfo.append({keys[count]:element[key]})
                                 print('key used ', key)
                                 if (counting + 1) < len(tempHold):
                                     print('TH ', tempHold[counting + 1])
@@ -278,8 +282,9 @@ def compareSmallest(values):
     rawValues = getRawValue(values)
     smallest = rawValues[0]
     for val in rawValues:
-        if val < smallest:
-            smallest = val
+        if type(val) == int or type(val) == float:
+            if val < smallest:
+                smallest = val
     print(smallest)
     smallestEntry = ''
     count = 0

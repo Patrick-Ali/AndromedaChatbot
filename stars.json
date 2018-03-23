@@ -2,11 +2,12 @@
 	"Sun":{
 		"info": "The Sun (or Sol), is the star at the centre of our solar system and is responsible for the Earth’s climate and weather. The Sun is an almost perfect sphere with a difference of just 10km in diameter between the poles and the equator. The average radius of the Sun is 695,508 km (109.2 x that of the Earth) of which 20–25% is the core.",
 		"source": "https://space-facts.com/the-sun/",
-		"Age": 4.6 ,
+		"Age": 4.6,
 		"Type": "Yellow Dwarf (G2V)",
 		"Diameter": 1392684,
 		"Equatorial Circumference": 4370005.6,
-		"Mass": "1.99 × 10^30 kg (333,060 Earths)",
+		"Mass Verbose": "1.99 × 10^30 kg (333,060 Earths)",
+		"Mass":333060,
 		"Surface Temperature": 5500
 	}
 }
