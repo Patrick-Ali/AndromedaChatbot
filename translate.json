@@ -17,6 +17,9 @@
 	"Orbit Period":["Orbit"],
 	"Most Massive":["heaviest", "most massive", "more massive"],
 	"Least Massive":["lightest", "least massive"],
-	"Mass":["Mass", "Weight", "Massive"]
+	"Mass":["Mass", "Weight", "Massive"],
+	"dwarfPlanets":["Dwarf Planets", "dwarf planets", "Dwarf Planet", "dwarf planet"],
+	"planet":["planets", "Planets"],
+	"stars":["star", "Stars", "sun", "Suns"]
 	
 }
