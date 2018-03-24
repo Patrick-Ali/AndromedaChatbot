@@ -48,7 +48,8 @@ def categorySearch(category, text):
             if i == config[count]:
                 data = loadData(config[count])
                 for element in data:
-                    pot.append({element:data[element]})
+                    if element not in text and element.lower() not in text:
+                        pot.append({element:data[element]})
             count += 1
     print("Data \n", pot)
     print(text)
