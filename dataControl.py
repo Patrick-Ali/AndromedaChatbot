@@ -38,6 +38,17 @@ def generalInfo(inputText, file):
             return hold[i]
     return specificInfo(inputText)
 
+def categorySearch(category, text):
+    config = getData('config', 'infoFiles')
+    data = loadData(config[category])
+    print("It works")
+    pot = []
+    for element in data:
+        pot.append({element:data[element]})
+    print("Data \n", pot)
+    print(text)
+    return compareData(text, pot)
+
 def specificInfoP1(inputText):
     config = getData('config', 'infoFiles')
     print(config)
@@ -50,11 +61,18 @@ def specificInfoP1(inputText):
     previousHit = ''
     while count < len(config): 
         data = loadData(config[count])
-        #print(data)
+        print(config[count])
         count += 1
         for element in data:
-            print(element)
+            print("Element ", element)
             for word in text:
+                print('Start ', count)
+                print('Word ', word)
+                if word == config[count-1]:
+                    print("Category Found")
+                    print(config[count])
+                    #categorySearch(count-1, hold)
+                    return categorySearch(count-1, hold)
                 if element == word or element.lower() == word or element == (word+"'s") or element.lower() == (word+"'s"):
                     if element != previousHit:
                         unique += 1
