@@ -38,6 +38,24 @@ def generalInfo(inputText, file):
             return hold[i]
     return specificInfo(inputText)
 
+def cleaningData(text, data):
+    count = 0
+    extra = []
+    while count < len(text):
+        if text[count] == 'exclude':
+            counting = count
+            while counting < len(text):
+                counting += 1
+                for elment in data:
+                    if text[counting] == element:
+                        extra.append(element)
+                    elif text[counting] == 'and' or text[counting] == 'also':
+                        continue
+                    else:
+                        break
+        count += 1
+    return extra
+
 def categorySearch(category, text):
     config = getData('config', 'infoFiles')
     print("It works")
@@ -47,6 +65,8 @@ def categorySearch(category, text):
         while count < len(config):
             if i == config[count]:
                 data = loadData(config[count])
+                testingData = cleaningData(text, data)
+                print('TD ', testingData)
                 for element in data:
                     if element not in text and element.lower() not in text:
                         pot.append({element:data[element]})
