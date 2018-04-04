@@ -75,6 +75,71 @@ def categorySearch(category, text):
     print(text)
     return compareData(text, pot)
 
+def trueStatement(inputText):
+    #Is Neptune bigger than Earth
+    lastWord = ''
+    lookFor1 = ''
+    lookFor2 = ''
+    lookFor3 = ''
+    count = 0
+    prohibit = ['Which', "which", "what", "What"]
+    trueState = False
+    holder = brokenWords(inputText)
+    text = translate(holder)
+    potWords = []
+    for element in text:
+        print("Working 1")
+        if lastWord in prohibit:
+            print("Pro")
+            trueState = False
+            break
+        if lastWord.lower() == 'is':
+            print("Found is")
+            trueState = True
+            potWords.append(text[-1])
+            if count < len(text):
+                #lookFor1 = element
+                potWords.append(element)
+            if (count + 1) < len(text):
+                #lookFor2 = text[count+1]
+                potWords.append(text[count+1])
+            if (count + 2) < len(text):
+                #lookFor3 = text[count+2]
+                potWords.append(text[count+2])
+            break
+        
+        count += 1
+        lastWord = element
+    
+    if trueState == False:
+        return specificInfoP1(inputText)
+    elif trueState == True:
+        hold = specificInfoP1(inputText)
+        #for word in hold:
+        for entry in potWords:
+            print("Ent", entry)
+            print(type(entry))
+            print("Hol", hold)
+            print(type(hold))
+            if hold == entry:
+                return "True"
+            elif type(hold) == str:
+                if hold.lower() == entry:
+                    return "True"
+            try:
+                tempInt = int(entry)
+                if tempInt == hold:
+                    return "True"
+            except:
+                continue
+                    
+        return 'False'
+##        if hold in potWords:  #or hold.lower() in potWords: #hold == lookFor1 or hold == lookFor2 or hold == lookFor3:
+##            return "True"
+##        elif type()
+##        else:
+##            return "False"
+        
 def specificInfoP1(inputText):
     config = getData('config', 'infoFiles')
     print(config)
@@ -97,11 +162,14 @@ def specificInfoP1(inputText):
                 print('Word ', word)
                 counter = 0
                 while counter < len(config):
+                    prevEnt = ''
                     for entry in text:
                         if entry == config[counter]:
-                            catSearch.append(entry)
-                            print("Category Found")
-                            print(config[counter])
+                            if prevEnt != 'the':
+                                catSearch.append(entry)
+                                print("Category Found")
+                                print(config[counter])
+                        prevEnt = entry
                     counter += 1
                     #categorySearch(count-1, hold)
                 if len(catSearch) > 0:
@@ -112,7 +180,12 @@ def specificInfoP1(inputText):
                     previousHit = element
                     potential.append({element:data[element]})
     if unique < 2:
-        return specificInfoP2(hold, potential)
+        tempInfo = specificInfoP2(hold, potential)
+        holder = tempInfo[0][0]
+        if len(holder) == 0:
+            return holder
+        for element in holder:
+            return holder[element]
     elif unique > 2 and ('to' in hold or 'from' in hold):
         return distanceToObject(hold, potential)
     else:

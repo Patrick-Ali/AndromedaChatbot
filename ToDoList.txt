@@ -4,7 +4,7 @@
 
 
 2 What is the closest planet to the Sun?
-3 What is the name of the 2nd biggest planet in our solar system?
+3 What is the name of the 2nd biggest planet in our solar system? ✔ 
 3 What is the hottest planet in our solar system?
 3 What planet is famous for its big red spot on it?
 3 What planet is famous for the beautiful rings that surround it?
@@ -27,7 +27,7 @@
 
 
 2 What is the closest planet to Saturn?
-3 What color is Venus?
+1 What color is Venus?
 1 What is a constellation?
 1 Why is the earth round?
 1 Why does the earth spin?
