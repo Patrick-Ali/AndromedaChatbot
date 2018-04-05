@@ -4,6 +4,7 @@
 	"Diameter smallest":["smallest", "small", "smaller"],
 	"Distance furthest":["further", "more distant", "more remote", "remoter", "furthest"],
 	"Distance closest":["closest", "nearest"],
+	"Distance":["Distance"],
 	"Equatorial Diameter": ["Diameter", "size", "diameter"],
 	"More Number Moons": ["more moons", "most moons"],
 	"Least Number Moons": ["fewest moons", "fewer moons", "least moons"],

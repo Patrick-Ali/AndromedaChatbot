@@ -56,10 +56,12 @@ def cleaningData(text, data):
         count += 1
     return extra
 
-def categorySearch(category, text):
+def categorySearch(category, text, trans):
     config = getData('config', 'infoFiles')
     print("It works")
     pot = []
+    holder = temp3(text, trans)
+    print("Temp3 ", holder)
     for i in category:
         count = 0
         while count < len(config):
@@ -73,7 +75,10 @@ def categorySearch(category, text):
             count += 1
     print("Data \n", pot)
     print(text)
-    return compareData(text, pot)
+    if len(holder) == 0:
+        return compareData(text, pot)
+    else:
+        return distanceToObject(text, pot, holder)
 
 def trueStatement(inputText):
     #Is Neptune bigger than Earth
@@ -139,7 +144,43 @@ def trueStatement(inputText):
 ##        elif type()
 ##        else:
 ##            return "False"
-        
+
+def temp3(text, trans):
+    config = getData('config', 'infoFiles')
+    print(config)
+    count = 0
+    #hold = brokenWords(inputText)
+    #text = translate(hold)
+    print("Text is ", text)
+    potential = []
+    unique = 0
+    previousHit = ''
+    catSearch = []
+    while count < len(config): 
+        data = loadData(config[count])
+        print(config[count])
+        count += 1
+        for element in data:
+            print("Element ", element)
+            for word in text:
+                print('Start ', count)
+                print('Word ', word)
+                counter = 0
+                if element == word or element.lower() == word or element == (word+"'s") or element.lower() == (word+"'s"):
+                    if element != previousHit:
+                        unique += 1
+                    previousHit = element
+                    potential.append({element:data[element]})
+
+    #return potential
+    tempInfo = specificInfoP2(trans, potential)
+    holder = tempInfo[0][0]
+    print("Ho ", holder)
+    #if len(holder) == 0:
+    return holder
+    #for element in holder:
+        #return holder[element]
+
 def specificInfoP1(inputText):
     config = getData('config', 'infoFiles')
     print(config)
@@ -173,7 +214,7 @@ def specificInfoP1(inputText):
                     counter += 1
                     #categorySearch(count-1, hold)
                 if len(catSearch) > 0:
-                    return categorySearch(catSearch, hold)
+                    return categorySearch(catSearch, hold, text)
                 if element == word or element.lower() == word or element == (word+"'s") or element.lower() == (word+"'s"):
                     if element != previousHit:
                         unique += 1
@@ -187,12 +228,12 @@ def specificInfoP1(inputText):
         for element in holder:
             return holder[element]
     elif unique > 2 and ('to' in hold or 'from' in hold):
-        return distanceToObject(hold, potential)
+        return distanceToObject(hold, potential, [])
     else:
         return compareData(hold, potential)
 
 #def checkKey(key, word)
-def distanceToObject(inputText, info):
+def distanceToObject(inputText, info, special):
     hold = specificInfoP2(inputText, info)
     print("Holdaro ", hold)
     first = hold[0]
@@ -201,19 +242,22 @@ def distanceToObject(inputText, info):
     test = ''
     print("First Len ", len(first))
     if len(first) > 0:
-        check = first[-1]
+        if special == []:
+            check = first[-1]
+        else:
+            check = special
         print('Checked ', check)
         for key in check:
             against = check[key]
             print(against)
         i = 0
-        while i < (len(first)-1):
+        while i < len(first):
             temp = first[i]
             for key in temp:
                 print("Kiloro ", key)
                 tempAgainst = temp[key]
                 print(tempAgainst)
-                tempSet = against-tempAgainst
+                tempSet = abs(against-tempAgainst)
                 print(tempSet)
                 tempHold.append({key:tempSet})
             i += 1

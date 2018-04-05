@@ -3,6 +3,8 @@
 3.get a specific piece of information
 
 
+
+
 2 What is the closest planet to the Sun?
 3 What is the name of the 2nd biggest planet in our solar system? ✔ 
 3 What is the hottest planet in our solar system?
@@ -24,7 +26,7 @@
 1 Does the sun orbit the Earth?
 3 Is the planet Neptune bigger than Earth?
 
-
+trueStatement("What is the closest planet to Saturn?")
 
 2 What is the closest planet to Saturn?
 1 What color is Venus?
