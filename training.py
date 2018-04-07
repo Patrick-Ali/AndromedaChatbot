@@ -48,6 +48,9 @@ def deleteData(data, key1, depth, key2 = None, key3 = None):
 def main():
     data = {}
     config = None
+    keyWords = None
+    actions = None
+    translate = None
     add = ''
     print("To go back or exit enter end")
     try:
@@ -57,11 +60,32 @@ def main():
         addData("config", data)
         config = loadData("config")
         print(config)
+    try:
+        keyWords = loadData("keyWords")
+    except:
+        data = {"keywords":[]}
+        addData("keyWords", data)
+        keyWords = loadData("keyWords")
+        print(keyWords)
+    try:
+        actions = loadData("actions")
+    except:
+        data = {"smallest":[], "largest":[]}
+        addData("actions", data)
+        actions = loadData("actions")
+        print(actions)
+    try:
+        translate = loadData("translate")
+    except:
+        data = {}
+        addData("translate", data)
+        translate = loadData("translate")
+        print(translate)
     while add != 'end':
         add = input("What do you want to do: ")
-        if add == 'end':
+        if add.lower() == 'end':
             break
-        if add.lower() == 'new category':
+        if add.lower() == 'add new category':
             confirmation = "no"
             while confirmation.lower() != "yes" or confirmation.lower() != "end":
                 title = input("Category title: ")
@@ -69,7 +93,7 @@ def main():
                     break
                 print("Cateory to add ", title)
                 confirmation = input("Is this correct, yes or no: ")
-                if confirmation == 'end':
+                if confirmation.lower() == 'end':
                     break
                 if confirmation.lower() == "yes":
                     confAdd = input("Do you want to add this, yes or no: ")
@@ -81,6 +105,37 @@ def main():
                         #data3.append(title)
                         data2 = {}
                         addData(title, data2)
+        if add.lower() == 'add new information':
+            while True:
+                category = input("Category name: ")
+                if category == "end":
+                    break
+                holdInfo = loadData(category)
+                depth = int(input("""Information level, maximum of three, e.g. planet->earth->size would be 3: """))
+                if depth == "end":
+                    break
+                if depth == 1:
+                    infoName = input("Subcategory name: ")
+                    holdInfo[infoName] = {}
+                    addData(category, holdInfo)
+                elif depth == 2:
+                    infoName = input("Subcategory name: ")
+                    infoDataKey = input("Data key: ")
+                    infoDataValue = input("Data key value: ")
+                    if infoDataValue != "[]" and infoDataValue != "{}":
+                        holdInfo[infoName][infoDataKey] = infoDataValue
+                    elif infoDataValue == "[]":
+                        holdInfo[infoName][infoDataKey] = []
+                    addData(category, holdInfo)
+                elif depth == 3:
+                    infoName = input("Subcategory name: ")
+                    infoDataKey = input("Data key: ")
+                    #infoDataKey2 = input("Data subkey: ")
+                    infoDataValue = input("Data key value: ")
+                    #holdInfo[infoName][infoDataKey][infoDataKey2] = []
+                    holdInfo[infoName][infoDataKey].append(infoDataValue)
+                    addData(category, holdInfo)
+                
                     
         
 if __name__ == "__main__":
