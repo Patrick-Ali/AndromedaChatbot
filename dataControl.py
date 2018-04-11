@@ -38,6 +38,15 @@ def generalInfo(inputText, file):
             return hold[i]
     return specificInfo(inputText)
 
+def remember(text):
+    addData("remember", text)
+
+def getMemory():
+    data = loadData("remember")
+    print("Data ", data)
+    return data
+
+
 def cleaningData(text, data):
     count = 0
     extra = []
@@ -188,6 +197,8 @@ def specificInfoP1(inputText):
     hold = brokenWords(inputText)
     text = translate(hold)
     print("Text is ", text)
+    memory = getMemory()
+    text.append(memory)
     potential = []
     unique = 0
     previousHit = ''
@@ -219,6 +230,7 @@ def specificInfoP1(inputText):
                     if element != previousHit:
                         unique += 1
                     previousHit = element
+                    remember(element)
                     potential.append({element:data[element]})
     if unique < 2:
         tempInfo = specificInfoP2(hold, potential)
@@ -360,9 +372,17 @@ def specificInfoP2(inputText, info):
                         lastWord = entry
                         counting += 1
                 if key == word or key == (lastWord+' '+word):
-                    if keys[count] in potentialInfo:
-                        if potentialInfo[keys[count]] != element[key]:
-                            potentialInfo.append({keys[count]:element[key]})
+                    print("KWF")
+                    print(keys)
+                    print(keys[count])
+                    print(potentialInfo)
+                    if {keys[count]:element[key]} in potentialInfo:
+                        print("Hello extra")
+                        #keys[count] in potentialInfo:
+##                        if potentialInfo[keys[count]] != element[key]:
+##                            potentialInfo.append({keys[count]:element[key]})
+                    else:
+                        potentialInfo.append({keys[count]:element[key]})
                     usedKey.append(key)
                     lastWord = word
         count += 1
