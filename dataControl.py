@@ -194,11 +194,13 @@ def specificInfoP1(inputText):
     config = getData('config', 'infoFiles')
     print(config)
     count = 0
-    hold = brokenWords(inputText)
+    hold = inputText
+    if type(inputText) == str:
+        hold = brokenWords(inputText)
     text = translate(hold)
     print("Text is ", text)
-    memory = getMemory()
-    text.append(memory)
+    #memory = getMemory()
+    #text.append(memory)
     potential = []
     unique = 0
     previousHit = ''
@@ -232,7 +234,7 @@ def specificInfoP1(inputText):
                     previousHit = element
                     remember(element)
                     potential.append({element:data[element]})
-    if unique < 2:
+    if unique < 2 and unique > 0:
         tempInfo = specificInfoP2(hold, potential)
         holder = tempInfo[0][0]
         if len(holder) == 0:
@@ -241,6 +243,11 @@ def specificInfoP1(inputText):
             return holder[element]
     elif unique > 2 and ('to' in hold or 'from' in hold):
         return distanceToObject(hold, potential, [])
+    elif len(potential) == 0:
+        memory = getMemory()
+        text.append(memory)
+        print("Text ", text)
+        return specificInfoP1(text)
     else:
         return compareData(hold, potential)
 
