@@ -205,6 +205,7 @@ def specificInfoP1(inputText):
     unique = 0
     previousHit = ''
     catSearch = []
+    memoryHolder = []
     while count < len(config): 
         data = loadData(config[count])
         print(config[count])
@@ -232,8 +233,12 @@ def specificInfoP1(inputText):
                     if element != previousHit:
                         unique += 1
                     previousHit = element
-                    remember(element)
+                    #remember(element)
+                    memoryHolder.append(element)
                     potential.append({element:data[element]})
+    if len(memoryHolder) > 0:
+        remember(memoryHolder)
+    
     if unique < 2 and unique > 0:
         tempInfo = specificInfoP2(hold, potential)
         holder = tempInfo[0][0]
@@ -245,7 +250,12 @@ def specificInfoP1(inputText):
         return distanceToObject(hold, potential, [])
     elif len(potential) == 0:
         memory = getMemory()
-        text.append(memory)
+        print(memory)
+        if type(memory) == list:
+            for element in memory:
+                text.append(element)
+        else:
+            text.append(memory)
         print("Text ", text)
         return specificInfoP1(text)
     else:
