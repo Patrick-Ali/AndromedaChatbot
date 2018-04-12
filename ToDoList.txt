@@ -3,8 +3,6 @@
 3.get a specific piece of information
 
 
-
-
 2 What is the closest planet to the Sun?
 3 What is the name of the 2nd biggest planet in our solar system? ✔ 
 3 What is the hottest planet in our solar system?
@@ -73,7 +71,8 @@ trueStatement("What is the closest planet to Saturn?")
 1 How Many Stars are in the Solar System?
 3 How Long is a Year on Uranus?
 1 How Long Does it Take to Get to Mars?
-3 How Hot is Venus?How Long Does it Take to get to the Moon?
+3 How Hot is Venus?
+1 How Long Does it Take to get to the Moon?
 3 How Long Does it Take Uranus to Orbit the Sun?
 1 Why Does Jupiter Have the Great Red Spot?
 1 Why Do Stars Twinkle?

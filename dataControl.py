@@ -69,7 +69,10 @@ def categorySearch(category, text, trans):
     config = getData('config', 'infoFiles')
     print("It works")
     pot = []
-    holder = temp3(text, trans)
+    try:
+        holder = temp3(text, trans)
+    except:
+        holder = []
     print("Temp3 ", holder)
     for i in category:
         count = 0
@@ -161,6 +164,7 @@ def temp3(text, trans):
     #hold = brokenWords(inputText)
     #text = translate(hold)
     print("Text is ", text)
+    print("Trans is ", trans)
     potential = []
     unique = 0
     previousHit = ''
