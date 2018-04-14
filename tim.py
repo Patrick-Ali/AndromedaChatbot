@@ -3,6 +3,7 @@ import threading
 from PIL import Image as img
 import controller as an
 import dataControl as res
+import cMath as calc
 
 class mkInterface:
     count = 0
@@ -13,7 +14,7 @@ class mkInterface:
     
     
     def __init__(self, root):
-        root.title("PlanetBot")
+        root.title("Andromeda")
         scale = 4
         #Config main window
         width = root.winfo_screenwidth()
@@ -128,14 +129,22 @@ class mkInterface:
 
     
     def getOutput(self, current): #, current
-        holdAn2 = res.specificInfoP1(current)
-        #print(type(holdAn2))
-        print(holdAn2)
-        if holdAn2 == [[],[]]:
-            holdAn1 = self.test.readInput(current)
-            holdAn = holdAn1
-        else:
-            holdAn = holdAn2
+        holdAn = calc.translate(current)
+        print(holdAn)
+        if holdAn == "Can't work with that input":
+            holdAn2 = res.trueStatement(current)#specificInfoP1(current)
+            print(type(holdAn2))
+            print("Hold Answer 2 = ", holdAn2)
+            if holdAn2 == [[],[]] or holdAn2 == []:
+                holdAn1 = self.test.readInput(current)
+                print("holdAn1 = ", holdAn1)
+                tempAn2 = ' '.join(holdAn1[0])
+                print(tempAn2)
+                holdAn4 = res.trueStatement(tempAn2)
+                print("Fianl Answer is ", holdAn4)
+                holdAn = holdAn1
+            else:
+                holdAn = holdAn2
         self.makeLabel(holdAn, "blue", "white", "e", self.count, 2)
         self.count += 1
         

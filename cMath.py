@@ -23,6 +23,7 @@ def getNum(num):
     nums = data.loadData("numbers")
     print(num.lower())
     for element in nums:
+        print(element)
         print(element == num)
         if nums[element] == num.lower() or element == num:
             print("Working")
@@ -47,7 +48,10 @@ def getOp(text):
 def translate(inputNum):
     op = []
     numbers = []
-    text = data.brokenWords(inputNum) 
+    if type(inputNum) != str:
+        return "Can't work with that input"
+    text = data.brokenWords(inputNum)
+    print(text)
     for i in text:
         print(i)
         temp = getOp(i)
@@ -70,23 +74,27 @@ def translate(inputNum):
             del op[0]
             del numbers[0]
             del numbers[0]
+            return ans
         elif op[0] == 'div':
             ans = div(numbers[0], numbers[1])
             del op[0]
             del numbers[0]
             del numbers[0]
+            return ans
         elif op[0] == 'add':
             ans = add(numbers[0], numbers[1])
             del op[0]
             del numbers[0]
             del numbers[0]
+            return ans
         elif op[0] == 'minus':
             ans = minus(numbers[0], numbers[1])
             del op[0]
             del numbers[0]
             del numbers[0]
+            return ans
     
-    #return num
+    return "Can't work with that input"
 
 
 if __name__ == "__main__":
