@@ -24,37 +24,9 @@ class AnalyseInput:
         print("Hold is ", hold)
         temp = []
         for i in hold:
-
-            if i == "Mercury":
-                hold = data.getData('planet', 'Mercury', 'info')
-                return hold
-                #return(self.pDictionary["Mercury"])
-            elif i == "Venus":
-                hold = data.getData('planet', 'Venus', 'info')
-                return hold
-                #return(self.pDictionary["Venus"])
-            elif i == "Earth":
-                hold = data.getData('planet', 'Earth', 'info')
-                return hold
-            elif i == "Mars":
-                hold = data.getData('planet', 'Mars', 'info')
-                return hold
-            elif i == "Jupiter":
-                hold = data.getData('planet', 'Jupiter', 'info')
-                return hold
-            elif i == "Saturn":
-                hold = data.getData('planet', 'Saturn', 'info')
-                return hold
-            elif i == "Uranus":
-                hold = data.getData('planet', 'Uranus', 'info')
-                return hold
-            elif i == "Neptune":
-                hold = data.getData('planet', 'Neptune', 'info')
-                return hold
-            else:
-                test = self.analyseWord(i)
-                for wordFound in test:
-                    temp.append(wordFound)
+            test = self.analyseWord(i)
+            for wordFound in test:
+                temp.append(wordFound)
 
         return temp
                 

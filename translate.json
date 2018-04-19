@@ -10,7 +10,7 @@
 	"Least Number Moons": ["fewest moons", "fewer moons", "least moons"],
 	"Moons Name": ["Name of Moons", "name of moons", "Name of moons", "the Moons"],
 	"Number Moons": ["Many Moons", "many moons", "Number of moons", "number of moons"],
-	"Max Surface Temperature":["hottest", "warmest", "warmer"],
+	"Max Surface Temperature":["hottest", "warmest", "warmer", "hotter"],
 	"Min Surface Temperature":["coldest", "cold", "coolest", "colder"],
 	"Effective Temperature":["Temperature"],
 	"Surface Temperature":["Temperature"],

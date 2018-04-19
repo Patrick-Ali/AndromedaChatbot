@@ -76,7 +76,8 @@ class mkInterface:
                       " I am currently in training but can tell you some"
                       " fun facts about your solar system."
                       " For more information type and enter 'help'"
-                      " and I will tell you somethings I can do.")
+                      " and I will tell you somethings I can do."
+                      " size and distance are in kilometers")
         self.makeLabel(welcomeMsg, "blue", "white", "e", self.count, 2)
         self.count += 1
         
