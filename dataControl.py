@@ -99,7 +99,7 @@ def trueStatement(inputText):
     lookFor2 = ''
     lookFor3 = ''
     count = 0
-    prohibit = ['Which', "which", "what", "What"]
+    prohibit = ['Which', "which", "what", "What", "how", "How"]
     trueState = False
     holder = brokenWords(inputText)
     text = translate(holder)
