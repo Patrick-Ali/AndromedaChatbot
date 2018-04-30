@@ -20,6 +20,7 @@ def div(num1, num2):
     return num
 
 def getNum(num):
+    '''Determine the numbers in the sentence'''
     nums = data.loadData("numbers")
     print(num.lower())
     for element in nums:
@@ -35,6 +36,7 @@ def getNum(num):
     return "Unkown Number"
 
 def getOp(text):
+    '''Dermine the operators in the sentence'''
     testing = data.loadData("math")
     for i in testing:
         if i == text:
@@ -46,6 +48,7 @@ def getOp(text):
     return "Unkown Operator"
 
 def translate(inputNum):
+    '''Entry point to translate the user input into something the chatbot can use'''
     op = []
     numbers = []
     if type(inputNum) != str:

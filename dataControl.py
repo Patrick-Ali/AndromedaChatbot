@@ -4,12 +4,14 @@ from nltk import word_tokenize as wt
 #data = {}
 
 def addData(file, data):
+    '''Add data to a specific file'''
     end = '.json'
     full = str(file+end)
     with open(full, 'w') as f:
         json.dump(data,f)
 
 def getData(file, key, value = None): #, value
+    '''Open a file and get the specific data from it'''
     end = '.json'
     full = str(file+end)
     with open(full, 'r') as f:
@@ -20,6 +22,7 @@ def getData(file, key, value = None): #, value
         return data[key][value]
 
 def loadData(file):
+    '''Open a file and get all the data from it'''
     end = '.json'
     full = str(file+end)
     with open(full, 'r') as f:
@@ -27,6 +30,7 @@ def loadData(file):
     return data
 
 def brokenWords(inputText):
+    '''Break a sentence into the words (tokens) that make it up'''
     hold = wt(inputText)
     return hold
 
@@ -39,15 +43,18 @@ def generalInfo(inputText, file):
     return specificInfo(inputText)
 
 def remember(text):
+    '''Add information to remember'''
     addData("remember", text)
 
 def getMemory():
+    '''Load the chatbots memory'''
     data = loadData("remember")
     print("Data ", data)
     return data
 
 
 def cleaningData(text, data):
+    '''Determin if the user wants anything extra, e.g. compare all planets and dwarf planets'''
     count = 0
     extra = []
     while count < len(text):
@@ -66,6 +73,7 @@ def cleaningData(text, data):
     return extra
 
 def categorySearch(category, text, trans):
+    '''Gather all the information from a category'''
     config = getData('config', 'infoFiles')
     print("It works")
     pot = []
@@ -93,6 +101,8 @@ def categorySearch(category, text, trans):
         return distanceToObject(text, pot, holder)
 
 def trueStatement(inputText):
+    '''Determine if the user input is a true or
+    false question and then determine the validity of the statement'''
     #Is Neptune bigger than Earth
     lastWord = ''
     lookFor1 = ''
@@ -151,18 +161,13 @@ def trueStatement(inputText):
                 continue
                     
         return 'False'
-##        if hold in potWords:  #or hold.lower() in potWords: #hold == lookFor1 or hold == lookFor2 or hold == lookFor3:
-##            return "True"
-##        elif type()
-##        else:
-##            return "False"
+
 
 def temp3(text, trans):
+    '''Determine the key components of a senetence'''
     config = getData('config', 'infoFiles')
     print(config)
     count = 0
-    #hold = brokenWords(inputText)
-    #text = translate(hold)
     print("Text is ", text)
     print("Trans is ", trans)
     potential = []
@@ -185,16 +190,14 @@ def temp3(text, trans):
                     previousHit = element
                     potential.append({element:data[element]})
 
-    #return potential
+    
     tempInfo = specificInfoP2(trans, potential)
     holder = tempInfo[0][0]
     print("Ho ", holder)
-    #if len(holder) == 0:
     return holder
-    #for element in holder:
-        #return holder[element]
 
 def specificInfoP1(inputText):
+    '''starting point for determining the key components of a senetence'''
     config = getData('config', 'infoFiles')
     print(config)
     count = 0
@@ -203,8 +206,6 @@ def specificInfoP1(inputText):
         hold = brokenWords(inputText)
     text = translate(hold)
     print("Text is ", text)
-    #memory = getMemory()
-    #text.append(memory)
     potential = []
     unique = 0
     previousHit = ''
@@ -267,6 +268,7 @@ def specificInfoP1(inputText):
 
 #def checkKey(key, word)
 def distanceToObject(inputText, info, special):
+    '''Determine the distance between objects'''
     hold = specificInfoP2(inputText, info)
     print("Holdaro ", hold)
     first = hold[0]
@@ -304,6 +306,7 @@ def distanceToObject(inputText, info, special):
     return test
 
 def specificInfoP2(inputText, info):
+    '''Pick out the information that is needed to supply the user with output'''
     potentialInfo = []
     print("Hello 1 ", inputText)
     print(info)
@@ -315,8 +318,6 @@ def specificInfoP2(inputText, info):
     usedKey = []
     held = []
     for element in info:
-        #tempInfo.append(info[counting])
-        #counting += 1
         for key in element:
             keys.append(key)
             print('Key2 ', key)
@@ -357,7 +358,6 @@ def specificInfoP2(inputText, info):
                                     print("I is ", i)
                                     print('Keys Count ', keys[count])
                                     print('Check ', element[key])
-                                    #print('pInfo ', potentialInfo[keys[count]])
                                     print('eKey ', element[key])
                                     if element[key] == i[keys[count]]:  #potentialInfo[keys[count]] == element[key]:
                                         addInfo = False
@@ -399,9 +399,6 @@ def specificInfoP2(inputText, info):
                     print(potentialInfo)
                     if {keys[count]:element[key]} in potentialInfo:
                         print("Hello extra")
-                        #keys[count] in potentialInfo:
-##                        if potentialInfo[keys[count]] != element[key]:
-##                            potentialInfo.append({keys[count]:element[key]})
                     else:
                         potentialInfo.append({keys[count]:element[key]})
                     usedKey.append(key)
@@ -414,6 +411,7 @@ def specificInfoP2(inputText, info):
     return held #potentialInfo
 
 def compareData(inputText, info):
+    '''Determine what action needs to be done to produce output'''
     hold = specificInfoP2(inputText, info)
     values = hold[0]
     print(values)
@@ -434,11 +432,7 @@ def compareData(inputText, info):
             print("Action ", actionKey)
             if actionKey == key:
                 key = action
-    
-##    if key == "Diameter":
-##        key = "largest"
-##    if key == "Diameter smallest":
-##        key = "smallest"
+
     print("Yolo Key is ", key)
     if key == "largest":
         return compareLargest(values)
@@ -446,36 +440,10 @@ def compareData(inputText, info):
         return compareSmallest(values)
     else:
         return values
-##    count = 0
-##    rawVals = []
-##    for i in values:
-##        print(i)
-##        for j in i:
-##            print(values[count][j])
-##            print(type(values[count][j]))
-##            rawVals.append(values[count][j])
-##        count += 1
-##    count = 0
-##    highest = rawVals[0]
-##    for val in rawVals:
-##        if val > highest:
-##            highest = val
-##    print(highest)
-##    lp = ''
-##    for i in values:
-##        print(i)
-##        for j in i:
-##            if values[count][j] == highest:
-##                print(j)
-##                lp = j
-##            #print(values[count][j])
-##            #print(type(values[count][j]))
-##            #rawVals.append(values[count][j])
-##        count += 1
-##    
-##    return lp
+
 
 def getRawValue(values):
+    '''Get values for comparisons'''
     count = 0
     rawVals = []
     for i in values:
@@ -488,6 +456,7 @@ def getRawValue(values):
     return rawVals
 
 def compareSmallest(values):
+    '''Determine what the smallest value is'''
     rawValues = getRawValue(values)
     smallest = rawValues[0]
     for val in rawValues:
@@ -503,14 +472,12 @@ def compareSmallest(values):
             if values[count][key] == smallest:
                 print(key)
                 smallestEntry = key
-            #print(values[count][j])
-            #print(type(values[count][j]))
-            #rawVals.append(values[count][j])
         count += 1
     
     return smallestEntry
 
 def compareLargest(values):
+    '''Determine what the largest value is'''
     rawValues = getRawValue(values)
     largest = rawValues[0]
     for val in rawValues:
@@ -526,14 +493,12 @@ def compareLargest(values):
             if values[count][key] == largest:
                 print(key)
                 largestEntry = key
-            #print(values[count][j])
-            #print(type(values[count][j]))
-            #rawVals.append(values[count][j])
         count += 1
     
     return largestEntry
 
 def translate(inputText):
+    '''Translate the user input into something the chatbot can understand'''
     data = loadData("translate")
     text = inputText
     print(text)
@@ -574,6 +539,7 @@ def translate(inputText):
 # Info - what information you want to add
 # Categories -  the level you wish yo go, e.g. Mars - Moons - Phobes - Rotation
 def addInfo(file, info, categories):
+    '''NOT IN USE'''
     data = loadData(file)
     tokens = wt(categories)
     words = [w for w in tokens]

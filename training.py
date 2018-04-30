@@ -46,6 +46,8 @@ def deleteData(data, key1, depth, key2 = None, key3 = None):
    
 
 def main():
+    '''Function will be run on a loop until user quits, will be used as the
+    main point from which training will be conducted'''
     data = {}
     config = None
     keyWords = None

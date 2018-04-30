@@ -6,6 +6,7 @@ import dataControl as res
 import cMath as calc
 
 class mkInterface:
+    '''Class used to generate the user interface'''
     count = 0
     E1 = ''
     topText = ''
@@ -31,9 +32,6 @@ class mkInterface:
 
         ##Config image
         imgHolder = self.mkFrameGrid(root, 0, 0, width, height)
-        #photo = tk.PhotoImage(file="pluto.png")
-        #label = tk.Label(imgHolder, image=photo)
-        #label.grid(row = 0, column = 0)
         imgPath = r"pluto.png"
         im_temp = img.open("pluto.jpg")
         im_temp = im_temp.resize((int((width/4)),int((width/4))), img.ANTIALIAS)
@@ -53,7 +51,9 @@ class mkInterface:
         holderCan.config(width=int((width/scale)*0.75),height=int((height/scale)*0.75))
         self.topText = tk.Frame(holderCan, bg='black', pady = 20)
         holderCan.create_window((4,4), window=self.topText, width = int((width/scale)))
+        ##Adapted from https://stackoverflow.com/questions/28573432/tkinter-fill-scrollable-canvas-with-frame-content
         self.topText.bind("<Configure>", lambda event, canvas=holderCan: self.onFrameConfigure(holderCan))
+        ##End adaptation
         self.configCol(tk.Grid, self.topText, 1, 1)
         self.configCol(tk.Grid, self.topText, 2, 1)
 
@@ -82,13 +82,14 @@ class mkInterface:
         self.count += 1
         
     def mkFrameGrid(self, place, ro, col, width, height):
+        '''Set up the grid place for tk widgets'''
         frame = tk.Frame(place)
         frame.grid(row=ro,column=col,sticky=tk.N+tk.E+tk.S+tk.W)
         frame.config(width=int((width/5)*0.75),height=int((height/5)*0.75))
-        #frame.grid_propagate(False)
         return frame
         
     def mkScrollBar(self, place, obj):
+        '''Set up the scroll bar for the canvas'''
         scrollbar = tk.Scrollbar(place, orient= tk.VERTICAL)
         scrollbar.config(command=obj.yview)
         scrollbar.pack( side = tk.RIGHT, fill = tk.Y )
@@ -107,6 +108,7 @@ class mkInterface:
         obj.columnconfigure(place, count, weight= wght)
         
     def makeLabel(self, message, backGround, fontColour, position, count, col):
+        '''Configure labels'''
         label = tk.Label( self.topText, text=message, relief=tk.FLAT, anchor = position,
                    bg = backGround, fg = fontColour, padx = 5, pady = 5, wraplength = 100)
         #, wraplength = 30 justify = tk.RIGHT
@@ -115,21 +117,22 @@ class mkInterface:
     def addWeight(self, count):
             tk.Grid.rowconfigure(self.topText, count, weight=1)
     
-    def run_before(lastfunc, *args1, **kwargs1):
-        def run(func):
-            def wrapped_func(self, *args, **kwargs):
-                try:
-                    result = func(self, *args, **kwargs)
-                except:
-                    result = None
-                finally:
-                    lastfunc(self, *args1, **kwargs1)
-                    return result
-            return wrapped_func
-        return run
+##    def run_before(lastfunc, *args1, **kwargs1):
+##        def run(func):
+##            def wrapped_func(self, *args, **kwargs):
+##                try:
+##                    result = func(self, *args, **kwargs)
+##                except:
+##                    result = None
+##                finally:
+##                    lastfunc(self, *args1, **kwargs1)
+##                    return result
+##            return wrapped_func
+##        return run
 
     
     def getOutput(self, current): #, current
+        '''Call the functions needed to determine what the user wants and generate output'''
         holdAn = calc.translate(current)
         print(holdAn)
         if holdAn == "Can't work with that input":
@@ -150,6 +153,7 @@ class mkInterface:
         self.count += 1
         
     def firstStep(self, current):
+        '''Output thinking message'''
         size = len(current)
         self.E1.delete(0,size)
         tk.Grid.rowconfigure(self.topText, self.count, weight=1)
@@ -159,50 +163,23 @@ class mkInterface:
         holdAn = ''
         thinkMsg = "Let me think about that"
         self.makeLabel(thinkMsg, "blue", "white", "e", self.count, 2)
-        
-    #@run_before(getOutput)        
+               
     def getInput(self, event = None):
+        '''Get the users input, start output messages, and pass user input into getOutput function to determine output'''
         current = self.E1.get()
         print(current)
         self.firstStep(current)
-##        size = len(current)
-##        self.E1.delete(0,size)
-##        tk.Grid.rowconfigure(self.topText, self.count, weight=1)
-##        self.addWeight(self.count)
-##        self.makeLabel(current, "lightgrey", "black", "w", self.count, 1)
-##        self.count += 1
-##        holdAn = ''
-##        thinkMsg = "Let me think about that"
-##        self.makeLabel(thinkMsg, "blue", "white", "e", self.count, 2)
         self.count += 1
         self.getOutput(current)
-        #thr = threading.Thread(target=self.getOuput(current), args=(), kwargs=())
-        #thr.start()
-        #thr.is_alive()
-        #thr.join()
-        #holdAn1 = self.test.readInput(current)
-        #print("First hold ", holdAn1)
-        #self.addWeight(self.count)
-##        holdAn2 = res.specificInfoP1(current)
-##        #print(type(holdAn2))
-##        print(holdAn2)
-##        if holdAn2 == [[],[]]:
-##            holdAn1 = self.test.readInput(current)
-##            holdAn = holdAn1
-##        else:
-##            holdAn = holdAn2
-##        self.makeLabel(holdAn, "blue", "white", "e", self.count, 2)
-##        self.count += 1
-        
+
+
+    #Function from https://stackoverflow.com/questions/28573432/tkinter-fill-scrollable-canvas-with-frame-content   
     def onFrameConfigure(self, canvas):
         '''Reset the scroll region to encompass the inner frame'''
         canvas.configure(scrollregion=canvas.bbox("all"))
         
 
 if __name__ == "__main__":
-    #def func(event):
-    #print("You hit return.")
     root = tk.Tk()
-    #root.bind('<Return>', func)
     mkInterface(root)
     root.mainloop()

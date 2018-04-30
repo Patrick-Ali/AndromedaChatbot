@@ -1,6 +1,7 @@
 from nltk.corpus import wordnet as wn, words as dictionary
 
 def testForWord(words, tested):
+    '''Determine possible words in a sentence'''
     word = words.lower()
     wordLen = len(word)
     count = 0
@@ -70,6 +71,7 @@ def testForWord(words, tested):
         #for i in word:
 
 def getWordDef(word):
+     '''Get the definition of a word'''
      hold = wn.synsets('car')
      print(hold)
      if len(hold) > 1:
